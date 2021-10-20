@@ -2,12 +2,6 @@
 
 class Slider {
 
-    /**
-     * @constructor
-     * 
-     * @param {string} DOM selector
-     * @param {array} sliders
-     */
     constructor({ DOMselector, slider }) {
         this.DOMselector = DOMselector;
         this.container = document.querySelector(this.DOMselector);  // Slider container
@@ -48,10 +42,6 @@ class Slider {
 
     /**
      * Draw single slider on init
-     * 
-     * @param {object} svg 
-     * @param {object} slider 
-     * @param {number} index 
      */
     drawSingleSliderOnInit(svg, slider) {
         // Default slider opts, if none are set
@@ -85,11 +75,6 @@ class Slider {
 
     /**
      * Output arch path
-     * 
-     * @param {number} cx 
-     * @param {number} cy 
-     * @param {number} angle 
-     * @param {string} type 
      */
     drawArcPath( radius, angle, type, group ) {
         // Slider path class
@@ -104,10 +89,6 @@ class Slider {
 
     /**
      * Draw handle for single slider
-     * 
-     * @param {object} slider 
-     * @param {number} initialAngle 
-     * @param {group} group 
      */
     drawHandle(slider, initialAngle, group) {
         // Calculate handle center
@@ -123,8 +104,6 @@ class Slider {
 
     /**
      * Redraw active slider
-     * 
-     * @param {obj} rmc
      */
     redrawActiveSlider(rmc) {
         const activePath = this.activeSlider.querySelector('.sliderSinglePathActive');
@@ -143,8 +122,6 @@ class Slider {
 
     /**
      * Mouse down / Touch start event
-     * 
-     * @param {object} e 
      */
     mouseTouchStart(e) {
         if (this.mouseDown) return;
@@ -155,8 +132,6 @@ class Slider {
 
     /**
      * Mouse move / touch move event
-     * 
-     * @param {object} e 
      */
     mouseTouchMove(e) {
         if (!this.mouseDown) return;
@@ -175,15 +150,7 @@ class Slider {
     }
 
     /**
-     * Helper functiom - describe arc
-     * 
-     * @param {number} x 
-     * @param {number} y 
-     * @param {number} radius 
-     * @param {number} startAngle 
-     * @param {number} endAngle 
-     * 
-     * @returns {string} path
+     * Helper function - describe arc
      */
     describeArc (x, y, radius, startAngle, endAngle) {
         let path, endAngleOriginal = endAngle, start, end, arcSweep;
@@ -210,13 +177,6 @@ class Slider {
 
     /**
      * Helper function - polar to cartesian transformation
-     * 
-     * @param {number} centerX 
-     * @param {number} centerY 
-     * @param {number} radius 
-     * @param {number} angleInDegrees 
-     * 
-     * @returns {object} coords
      */
      polarToCartesian (centerX, centerY, radius, angleInDegrees) {
         const angleInRadians = angleInDegrees * Math.PI / 180;
@@ -227,11 +187,6 @@ class Slider {
 
     /**
      * Helper function - calculate handle center
-     * 
-     * @param {number} angle 
-     * @param {number} radius
-     * 
-     * @returns {object} coords 
      */
     calculateHandleCenter (angle, radius) {
         const x = this.cx + Math.cos(angle) * radius;
@@ -241,10 +196,6 @@ class Slider {
 
     /**
      * Get mouse/touch coordinates relative to the top and left of the container
-     *  
-     * @param {object} e
-     * 
-     * @returns {object} coords
      */ 
     getRelativeMouseOrTouchCoordinates (e) {
         const containerRect = document.querySelector('.slider__data').getBoundingClientRect();
@@ -268,10 +219,6 @@ class Slider {
 
     /**
      * Calculate mouse angle in radians
-     * 
-     * @param {object} rmc 
-     * 
-     * @returns {number} angle
      */
     calculateMouseAngle(rmc) {
         const angle = Math.atan2(rmc.y - this.cy, rmc.x - this.cx);
@@ -285,10 +232,6 @@ class Slider {
 
     /**
      * Helper function - transform radians to degrees
-     * 
-     * @param {number} angle 
-     * 
-     * @returns {number} angle
      */
     radiansToDegrees(angle) {
         return angle / (Math.PI / 180);
