@@ -9,6 +9,38 @@
     <title>JS Round Range Slider App</title>
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,600" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="app.css">
+    <style>
+        *, 
+        *::before, 
+        *::after {
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            font-family: 'Raleway', sans-serif; 
+        }
+
+        .container {
+            padding: 5% 1.5rem;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        #app {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        h1 {
+            margin-bottom: 2rem;
+            font-size: 3rem;
+        }
+    </style>
 </head>
 
 <body>
@@ -26,35 +58,15 @@
         // slider app options
         const opts = {
             DOMselector: '#app',
-            sliders: [
+            slider:
                 {
                     radius: 100,
                     min: 0,
                     max: 100,
-                    step: 10,
-                    initialValue: 50,
+                    step: 1,
+                    initialValue: 0,
                     color: '#fdcb6e',
-                    displayName: 'Value 1'
-                },
-                {
-                    radius: 160,
-                    min: 0,
-                    max: 3000,
-                    step: 100,
-                    initialValue: 200,
-                    color: '#0984e3',
-                    displayName: 'Value 2'
-                },
-                {
-                    radius: 40,
-                    min: 0,
-                    max: 200,
-                    step: 10,
-                    initialValue: 20,
-                    color: '#d63031',
-                    displayName: 'Value 3'
                 }
-            ]
         };
 
         // instantiate the slider
