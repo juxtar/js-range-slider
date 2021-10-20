@@ -1,0 +1,15 @@
+{
+  "name": "js-range-slider",
+  "version": "1.0.0",
+  "description": "This slider is built with vanilla JS. It's reusable, customizable and easy to use.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "parcel": "^2.0.0"
+  }
+}
