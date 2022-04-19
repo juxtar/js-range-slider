@@ -13,6 +13,7 @@ class Slider {
         this.sliderData = slider;                                   // Sliders array with opts for each slider
         this.mouseDown = false;                                     // Is mouse down
         this.activeSlider = null;                                   // Stores active (selected) slider
+        this.onSliderMoveStart = this.onSliderMove = this.onSliderMoveEnd = (() => {});
     }
 
     /**
@@ -128,6 +129,7 @@ class Slider {
         this.mouseDown = true;
         const rmc = this.getRelativeMouseOrTouchCoordinates(e);
         this.redrawActiveSlider(rmc);
+        this.onSliderMoveStart(this.calculateValue(rmc));
     }
 
     /**
@@ -138,15 +140,27 @@ class Slider {
         e.preventDefault();
         const rmc = this.getRelativeMouseOrTouchCoordinates(e);
         this.redrawActiveSlider(rmc);
+        this.onSliderMove(this.calculateValue(rmc));
     }
 
     /**
      * Mouse move / touch move event
      * Deactivate slider
      */
-    mouseTouchEnd() {
+    mouseTouchEnd(e) {
         if (!this.mouseDown) return;
         this.mouseDown = false;
+        const rmc = this.getRelativeMouseOrTouchCoordinates(e);
+        this.onSliderMoveEnd(this.calculateValue(rmc));
+    }
+
+    calculateValue(relativeCoordinates) {
+        const angle = this.calculateMouseAngle(relativeCoordinates) * 0.999;
+        const range = this.sliderData.max - this.sliderData.min;
+        let value = angle / this.tau * range;
+        const numOfSteps =  Math.round(value / this.sliderData.step);
+        value = this.sliderData.min + numOfSteps * this.sliderData.step;
+        return value;
     }
 
     /**
@@ -178,7 +192,7 @@ class Slider {
     /**
      * Helper function - polar to cartesian transformation
      */
-     polarToCartesian (centerX, centerY, radius, angleInDegrees) {
+    polarToCartesian (centerX, centerY, radius, angleInDegrees) {
         const angleInRadians = angleInDegrees * Math.PI / 180;
         const x = centerX + (radius * Math.cos(angleInRadians));
         const y = centerY + (radius * Math.sin(angleInRadians));
